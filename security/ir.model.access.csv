@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_bill_count,bill.count,model_bill_count,base.group_user,1,1,1,1
+access_bill_detial,bill.detial,model_bill_detial,base.group_user,1,1,1,1
+access_invoice_sum,invoive.sum,model_invoice_sum,base.group_user,1,1,1,1
