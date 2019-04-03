@@ -4,11 +4,11 @@
     <!-- Top menu item -->
     <menuitem id="menu_bill" name="账单"/>
     <!-- menu categories -->
-    <menuitem id="menu_bill_detial" name="账套信息明细" parent="menu_bill"/>
+    
     <!--
     <menuitem id="menu_agent_account" name="代理记账公司" parent="menu_bill"/>
     -->
-    <menuitem id="menu_invoice_sum" name="单据汇总" parent="menu_bill"/>
+    
     <!-- explicit list view definition -->
  
     <record model="ir.ui.view" id="period_tree">
@@ -23,11 +23,57 @@
                 <field name="company_belong"/>
                 <field name="invoice_num"/>
                 <field name="ocr_done"/>
-                <field name="account_done"/>  
+                <field name="account_done"/>
+            </tree>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="agent_tree">
+        <field name="name">agent.tree</field>
+        <field name="model">agent.bill</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="company_id"/>
+                <field name="company_name"/>
+                <field name="coop_mode"/>
+                <field name="name"/>
+                <field name="cost"/>
+                <field name="tips"/>
+            </tree>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="bill_tree">
+        <field name="name">bill.tree</field>
+        <field name="model">bill.count</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="sale_man"/>
+                <field name="company_name"/>
+                <field name="name"/>
+                <field name="duty_num"/>
+                <field name="total_sum"/>
+                <field name="tips"/>
+            </tree>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="coop_tree">
+        <field name="name">coop.tree</field>
+        <field name="model">coop.type</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="coop_id"/>
             </tree>
         </field>
     </record>
     
+    <record model="ir.ui.view" id="line_tree">
+        <field name="name">line.tree</field>
+        <field name="model">bill.lines</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="bill_lines"/>
+            </tree>
+        </field>
+    </record>
    
     <!-- actions opening views on models -->
     <!-- 菜单动作定义 -->
@@ -54,13 +100,27 @@
         <field name="view_mode">tree,form</field>
         <field name="target">current</field>
     </record>      
-    <record id="action_bill_detial" model="ir.actions.act_window">
-        <field name="name">测试</field>
-        <field name="res_model">bill.detial</field>
+    <record id="action_agent_bill" model="ir.actions.act_window">
+        <field name="name">代理记账公司</field>
+        <field name="res_model">agent.bill</field>
         <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
         <field name="target">current</field>   
     </record> 
+     <record id="action_coop_type" model="ir.actions.act_window">
+        <field name="name">合作模式</field>
+        <field name="res_model">coop.type</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="target">current</field>   
+    </record> 
+    <record model="ir.actions.act_window" id="action_bill_lines">
+        <field name="name">明细</field>
+        <field name="res_model">bill.lines</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="target">current</field>
+    </record>
     <!-- 子菜单定义 -->
     <!--
     <menuitem action="action_agent_account" id="submenu_agent_account" name="代理记账公司"
@@ -68,9 +128,13 @@
     -->
     <menuitem action="action_invoice_sum" id="submenu_invoice_sum" name="单据汇总"
     parent="menu_bill"/>
-    <menuitem action="action_bill_detial" id="submenu_bill_detial" name="测试"
+    <menuitem action="action_agent_bill" id="submenu_agent_bill" name="代理记账公司"
     parent="menu_bill"/>
     <menuitem action="action_bill_count" id="submenu_bill_count" name="账单"
+    parent="menu_bill"/>
+    <menuitem action="action_coop_type" id="submenu_coop_type" name="合作模式"
+    parent="menu_bill"/>
+    <menuitem action="action_bill_lines" id="submenu_bill_lines" name="账单明细"
     parent="menu_bill"/>
     
 

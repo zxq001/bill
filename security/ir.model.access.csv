@@ -1,4 +1,6 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_bill_count,bill.count,model_bill_count,base.group_user,1,1,1,1
-access_bill_detial,bill.detial,model_bill_detial,base.group_user,1,1,1,1
+access_agent_bill,agent.bill,model_agent_bill,base.group_user,1,1,1,1
 access_invoice_sum,invoive.sum,model_invoice_sum,base.group_user,1,1,1,1
+access_coop_type,coop.type,model_coop_type,base.group_user,1,1,1,1
+access_bill_lines,bill.lines,model_bill_lines,base.group_user,1,1,1,1
