@@ -6,15 +6,27 @@ class BillCount(models.Model):
     _name = 'bill.count'
     _description = "账单"
 
+    name = fields.Char(
+        u'账单名称',
+        compute='_compute_name', readonly=True, store=True)
     sale_man = fields.Char('业务员')
     company_name = fields.Char('客户名称')
-    name = fields.Char('做账日期')
+    account_date = fields.Char('做账日期')
     duty_num = fields.Char('税号个数')
     total_sum = fields.Char('总金额')
     tips = fields.Char('备注')
-    lines_ids = fields.One2many('bill.lines', 'bill_lines', string=u"明细项")
+    lines_ids = fields.One2many('bill.lines', 'count_id', string=u"明细项")
     
-      
+    @api.one
+    @api.depends('account_date','company_name')
+    def _compute_name(self):
+        """
+        根据填写的月份年份 设定期间的name值
+        :return: None
+        """
+        if self.account_date and self.company_name:
+            self.name = '%s%s'%(self.account_date,self.company_name)
+    
 #    bill_id = fields.Many2one('bill.line',string='分类')
 # value = fields.Integer()
 # value2 = fields.Float(compute="_value_pc", store=True)
@@ -59,7 +71,7 @@ class bill_lines(models.Model):
     name = fields.Char('账期')
     cost = fields.Char('费用')
     tips = fields.Char('备注')
-    lines_id = fields.Many2one('bill.count', string=u"明细项",index=True)
+    count_id = fields.Many2one('bill.count', string=u"账单", index=True)
 
 class coop_type(models.Model):
     _name = 'coop.type'

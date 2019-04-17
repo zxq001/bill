@@ -41,6 +41,40 @@
             </tree>
         </field>
     </record>
+    
+    <record model="ir.ui.view" id="bill_form">
+        <field name="name">bill.form</field>
+        <field name="model">bill.count</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Bill Count">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="sale_man"/>
+                            <field name="company_name"/>
+                            <field name="account_date"/>
+                        </group>
+                        <group>
+                            <field name="duty_num"/>
+                            <field name="total_sum"/>
+                            <field name="tips"/>
+                        </group>
+                    </group>    
+                    <field name="lines_ids">
+							<tree string="账套明细" editable="bottom">
+								<field name="company_id"/>
+								<field name="company_name"/>
+								<field name="coop_id"/>
+								<field name="name"/>
+								<field name="cost"/>
+								<field name="tips"/>
+							</tree>							
+					</field>
+                </sheet>        
+			</form>		  
+        </field>
+    </record>
     <record model="ir.ui.view" id="bill_tree">
         <field name="name">bill.tree</field>
         <field name="model">bill.count</field>
@@ -48,7 +82,7 @@
             <tree>
                 <field name="sale_man"/>
                 <field name="company_name"/>
-                <field name="name"/>
+                <field name="account_date"/>
                 <field name="duty_num"/>
                 <field name="total_sum"/>
                 <field name="tips"/>
@@ -64,7 +98,7 @@
             </tree>
         </field>
     </record>
-    
+    <!--
     <record model="ir.ui.view" id="line_tree">
         <field name="name">line.tree</field>
         <field name="model">bill.lines</field>
@@ -74,7 +108,7 @@
             </tree>
         </field>
     </record>
-   
+    -->
     <!-- actions opening views on models -->
     <!-- 菜单动作定义 -->
     <record model="ir.actions.act_window" id="action_bill_count">
@@ -114,6 +148,7 @@
         <field name="view_mode">tree,form</field>
         <field name="target">current</field>   
     </record> 
+    <!--
     <record model="ir.actions.act_window" id="action_bill_lines">
         <field name="name">明细</field>
         <field name="res_model">bill.lines</field>
@@ -121,6 +156,7 @@
         <field name="view_mode">tree,form</field>
         <field name="target">current</field>
     </record>
+    -->
     <!-- 子菜单定义 -->
     <!--
     <menuitem action="action_agent_account" id="submenu_agent_account" name="代理记账公司"
@@ -134,8 +170,10 @@
     parent="menu_bill"/>
     <menuitem action="action_coop_type" id="submenu_coop_type" name="合作模式"
     parent="menu_bill"/>
+    <!--
     <menuitem action="action_bill_lines" id="submenu_bill_lines" name="账单明细"
     parent="menu_bill"/>
+    -->
     
 
     <!-- server action to the one above -->
